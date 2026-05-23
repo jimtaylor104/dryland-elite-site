@@ -156,20 +156,22 @@
     /* ───────── Phone mockup ───────── */
     .phone {
       position: relative;
-      aspect-ratio: 9 / 19.5;
-      background: linear-gradient(135deg, #cfd6e3 0%, #aab3c4 100%);
+      background: #0d1730;
       border-radius: 28px;
       max-width: 220px;
       margin: 0 auto;
+      padding: 5px;
       box-shadow:
         0 28px 60px rgba(0,0,0,0.35),
-        0 8px 16px rgba(0,0,0,0.25),
-        inset 0 0 0 5px #0d1730;
+        0 8px 16px rgba(0,0,0,0.25);
       overflow: hidden;
     }
     .phone-placeholder {
       position: absolute;
-      inset: 5px;
+      top: 5px;
+      left: 5px;
+      right: 5px;
+      aspect-ratio: 9 / 19.5;
       border-radius: 23px;
       display: flex;
       align-items: center;
@@ -193,14 +195,12 @@
       filter: grayscale(0.4);
     }
     .phone img {
-      position: absolute;
-      inset: 5px;
+      display: block;
+      position: relative;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
       border-radius: 23px;
-      width: calc(100% - 10px);
-      height: calc(100% - 10px);
-      object-fit: contain;
-      object-position: top;
-      background: #0d1730;
       z-index: 1;
     }
     .phone::after {
