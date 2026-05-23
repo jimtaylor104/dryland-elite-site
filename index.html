@@ -153,68 +153,19 @@
       margin-top: 2px;
     }
 
-    /* ───────── Phone mockup ───────── */
+    /* ───────── Screenshot image card ───────── */
     .phone {
-      position: relative;
-      background: #0d1730;
-      border-radius: 28px;
-      max-width: 220px;
+      max-width: 320px;
       margin: 0 auto;
-      padding: 5px;
-      box-shadow:
-        0 28px 60px rgba(0,0,0,0.35),
-        0 8px 16px rgba(0,0,0,0.25);
-      overflow: hidden;
     }
-    .phone-placeholder {
-      position: absolute;
-      top: 5px;
-      left: 5px;
-      right: 5px;
-      aspect-ratio: 9 / 19.5;
-      border-radius: 23px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 4px;
-      background: linear-gradient(180deg, #e3e7ee 0%, #c3cad7 100%);
-      color: #6a7383;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 800;
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      text-align: center;
-      padding: 16px;
-      z-index: 0;
-    }
-    .phone-placeholder::before {
-      content: '📱';
-      font-size: 28px;
-      filter: grayscale(0.4);
-    }
+    .phone-placeholder { display: none; }
     .phone img {
       display: block;
-      position: relative;
       width: 100%;
-      height: auto;
-      object-fit: cover;
-      border-radius: 23px;
-      z-index: 1;
-    }
-    .phone::after {
-      /* notch */
-      content: '';
-      position: absolute;
-      top: 9px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 64px;
-      height: 16px;
-      border-radius: 9px;
-      background: #0d1730;
-      z-index: 2;
+      max-width: 320px;
+      margin: 0 auto;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
     }
 
     /* ───────── Section base ───────── */
@@ -374,7 +325,6 @@
       .hero { padding: 36px 0 56px; min-height: auto; }
       .hero-grid { grid-template-columns: 1fr; gap: 40px; }
       .hero-sub { font-size: 16px; }
-      .phone { max-width: 180px; }
       .steps { grid-template-columns: 1fr; gap: 12px; }
       .step { padding: 20px 12px; }
       .feature, .feature.reverse {
