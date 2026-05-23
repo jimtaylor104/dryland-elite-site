@@ -1,0 +1,597 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dryland Elite — Youth Hockey Dryland Training</title>
+  <meta name="description" content="Structured offseason dryland training for youth hockey players. Daily programs, XP rewards, weekly battles, and a leaderboard that keeps kids grinding all summer." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@800&family=Barlow:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #1B2A4A;
+      --cyan: #00C4D4;
+      --orange: #F47B20;
+      --white: #ffffff;
+      --grey-50: #F6F7F9;
+      --grey-200: #E4E7EC;
+      --grey-400: #98A2B3;
+      --grey-600: #475467;
+      --grey-800: #1D2939;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Barlow', system-ui, -apple-system, sans-serif;
+      font-weight: 400;
+      color: var(--grey-800);
+      background: var(--white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4, .display {
+      font-family: 'Barlow Condensed', system-ui, sans-serif;
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: 0.005em;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ───────── Layout helpers ───────── */
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 26px;
+      border-radius: 10px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 16px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: none;
+      transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+      white-space: nowrap;
+    }
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+    .btn-cyan   { background: var(--cyan);   color: var(--navy); }
+    .btn-orange { background: var(--orange); color: var(--white); font-size: 18px; padding: 18px 32px; }
+
+    /* ───────── Nav ───────── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--navy);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 24px;
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+    .logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 22px;
+      letter-spacing: 0.04em;
+      color: var(--white);
+    }
+    .logo span { color: var(--cyan); }
+
+    /* ───────── Hero ───────── */
+    .hero {
+      background: var(--navy);
+      color: var(--white);
+      min-height: calc(100vh - 60px);
+      display: flex;
+      align-items: center;
+      padding: 48px 0 60px;
+      overflow: hidden;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 56px;
+      align-items: center;
+    }
+    .eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 14px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-size: clamp(44px, 6vw, 76px);
+      margin-bottom: 18px;
+    }
+    .hero h1 .accent { color: var(--cyan); }
+    .hero-sub {
+      font-size: 18px;
+      color: rgba(255,255,255,0.78);
+      margin-bottom: 22px;
+      max-width: 540px;
+    }
+    .hero-bullets {
+      list-style: none;
+      margin-bottom: 30px;
+    }
+    .hero-bullets li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 15px;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 8px;
+    }
+    .hero-bullets li::before {
+      content: '✓';
+      color: var(--cyan);
+      font-weight: 700;
+      font-size: 17px;
+      line-height: 1;
+      margin-top: 2px;
+    }
+
+    /* ───────── Phone mockup ───────── */
+    .phone {
+      position: relative;
+      aspect-ratio: 9 / 19.5;
+      background: linear-gradient(135deg, #cfd6e3 0%, #aab3c4 100%);
+      border-radius: 36px;
+      max-width: 320px;
+      margin: 0 auto;
+      box-shadow:
+        0 28px 60px rgba(0,0,0,0.35),
+        0 8px 16px rgba(0,0,0,0.25),
+        inset 0 0 0 6px #0d1730;
+      overflow: hidden;
+    }
+    .phone-placeholder {
+      position: absolute;
+      inset: 6px;
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 6px;
+      background: linear-gradient(180deg, #e3e7ee 0%, #c3cad7 100%);
+      color: #6a7383;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 14px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 24px;
+      z-index: 0;
+    }
+    .phone-placeholder::before {
+      content: '📱';
+      font-size: 38px;
+      filter: grayscale(0.4);
+    }
+    .phone img {
+      position: absolute;
+      inset: 6px;
+      border-radius: 30px;
+      width: calc(100% - 12px);
+      height: calc(100% - 12px);
+      object-fit: cover;
+      z-index: 1;
+    }
+    .phone::after {
+      /* notch */
+      content: '';
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 92px;
+      height: 22px;
+      border-radius: 12px;
+      background: #0d1730;
+      z-index: 2;
+    }
+
+    /* ───────── Section base ───────── */
+    section { padding: 96px 0; }
+    .section-title {
+      text-align: center;
+      font-size: clamp(34px, 4.5vw, 52px);
+      margin-bottom: 14px;
+    }
+    .section-kicker {
+      text-align: center;
+      color: var(--grey-600);
+      font-size: 17px;
+      margin-bottom: 56px;
+      max-width: 620px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ───────── How it works ───────── */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    .step {
+      text-align: center;
+      padding: 28px 20px;
+    }
+    .step-emoji {
+      font-size: 52px;
+      margin-bottom: 14px;
+      display: block;
+    }
+    .step h3 {
+      font-size: 26px;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+    .step p {
+      color: var(--grey-600);
+      font-size: 15px;
+      max-width: 280px;
+      margin: 0 auto;
+    }
+
+    /* ───────── Features (dark) ───────── */
+    .features {
+      background: var(--navy);
+      color: var(--white);
+    }
+    .features .section-title { color: var(--white); }
+    .features .section-kicker { color: rgba(255,255,255,0.7); }
+    .feature {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      padding: 40px 0;
+    }
+    .feature.reverse {
+      direction: rtl;
+    }
+    .feature.reverse > * { direction: ltr; }
+    .feature h3 {
+      font-size: clamp(28px, 3.4vw, 40px);
+      margin-bottom: 14px;
+      color: var(--white);
+    }
+    .feature p {
+      font-size: 17px;
+      color: rgba(255,255,255,0.78);
+      max-width: 460px;
+    }
+
+    /* ───────── Ranks ───────── */
+    .ranks {
+      background: var(--grey-50);
+    }
+    .rank-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+    }
+    .rank-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 24px 18px;
+      text-align: center;
+      box-shadow: 0 1px 3px rgba(16,24,40,0.06), 0 1px 2px rgba(16,24,40,0.06);
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .rank-card:hover { transform: translateY(-3px); box-shadow: 0 14px 26px rgba(16,24,40,0.10); }
+    .rank-emoji {
+      font-size: 44px;
+      margin-bottom: 8px;
+      display: block;
+    }
+    .rank-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 22px;
+      color: var(--navy);
+      margin-bottom: 2px;
+    }
+    .rank-xp {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      color: var(--cyan);
+      font-size: 15px;
+      letter-spacing: 0.04em;
+      margin-bottom: 8px;
+    }
+    .rank-desc {
+      font-size: 13px;
+      color: var(--grey-600);
+      line-height: 1.45;
+    }
+
+    /* ───────── CTA banner ───────── */
+    .cta-banner {
+      background: var(--navy);
+      color: var(--white);
+      text-align: center;
+    }
+    .cta-banner h2 {
+      font-size: clamp(34px, 4.5vw, 54px);
+      margin-bottom: 12px;
+    }
+    .cta-banner p {
+      font-size: 18px;
+      color: rgba(255,255,255,0.78);
+      margin-bottom: 28px;
+    }
+
+    /* ───────── Footer ───────── */
+    footer {
+      background: var(--navy);
+      color: rgba(255,255,255,0.65);
+      padding: 36px 0 32px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      font-size: 14px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+    .footer-grid > div + div { text-align: center; }
+    .footer-grid > div:last-child { text-align: right; }
+    footer .logo { display: block; margin-bottom: 6px; }
+    footer a { color: var(--cyan); }
+
+    /* ───────── Mobile ───────── */
+    @media (max-width: 880px) {
+      .hero { padding: 36px 0 56px; min-height: auto; }
+      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+      .hero-sub { font-size: 16px; }
+      .steps { grid-template-columns: 1fr; gap: 12px; }
+      .step { padding: 20px 12px; }
+      .feature, .feature.reverse {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        direction: ltr;
+      }
+      .feature .phone { order: 2; }
+      .rank-row {
+        grid-template-columns: repeat(5, 80%);
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        padding-bottom: 10px;
+        margin: 0 -24px;
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+      .rank-card { scroll-snap-align: start; }
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        text-align: left;
+      }
+      .footer-grid > div + div,
+      .footer-grid > div:last-child { text-align: left; }
+      section { padding: 64px 0; }
+    }
+
+    @media (max-width: 520px) {
+      .btn-orange { font-size: 16px; padding: 16px 24px; }
+      .nav-inner { padding: 12px 18px; }
+      .container { padding: 0 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="#" class="logo">DRYLAND<span>ELITE</span></a>
+      <a class="btn btn-cyan" href="https://app.drylandelite.com">Join Your Team</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">Youth Hockey Dryland Training</div>
+        <h1>Train. Level Up. <span class="accent">Dominate.</span></h1>
+        <p class="hero-sub">
+          The offseason is where champions are built. Dryland Elite gives youth
+          hockey players a structured training program, XP rewards, and weekly
+          battles to keep them grinding all summer.
+        </p>
+        <ul class="hero-bullets">
+          <li>Free for players whose teams are enrolled</li>
+          <li>Built on USA Hockey ADM training principles</li>
+        </ul>
+        <a class="btn btn-orange" href="https://app.drylandelite.com">Join Your Team →</a>
+      </div>
+      <div>
+        <div class="phone">
+          <div class="phone-placeholder">App Screenshot</div>
+          <img src="screenshots/home.png" alt="Dryland Elite home screen" loading="lazy" onerror="this.style.display='none'">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how-it-works">
+    <div class="container">
+      <h2 class="section-title" style="color: var(--navy);">How It Works</h2>
+      <p class="section-kicker">Three steps from joining your team to climbing the leaderboard.</p>
+      <div class="steps">
+        <div class="step">
+          <span class="step-emoji">🏒</span>
+          <h3>Get Your Code</h3>
+          <p>Your coach gives you your team's join code. Enter it, pick your division, and you're in.</p>
+        </div>
+        <div class="step">
+          <span class="step-emoji">⚡</span>
+          <h3>Follow Your Program</h3>
+          <p>Each age group has a structured daily training program. Open the app, see today's drills, complete them, log your session.</p>
+        </div>
+        <div class="step">
+          <span class="step-emoji">👑</span>
+          <h3>Level Up</h3>
+          <p>Earn XP every session. Climb from Pylon to Legend. Challenge teammates to weekly battles. See your rank rise on the leaderboard.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <div class="container">
+      <h2 class="section-title">Everything You Need to Stay Sharp</h2>
+      <p class="section-kicker">A full training toolkit, packaged into a phone-first experience.</p>
+
+      <div class="feature">
+        <div>
+          <h3>Structured Daily Training</h3>
+          <p>Each session tells your player exactly what to do. Age-appropriate drills, warm-ups, and a one-tap session log. No guesswork.</p>
+        </div>
+        <div>
+          <div class="phone">
+            <div class="phone-placeholder">App Screenshot</div>
+            <img src="screenshots/home.png" alt="Today's Training card" loading="lazy" onerror="this.style.display='none'">
+          </div>
+        </div>
+      </div>
+
+      <div class="feature reverse">
+        <div>
+          <h3>200+ ADM-Based Drills</h3>
+          <p>Full exercise library built on USA Hockey's American Development Model. Every drill includes equipment needed, setup, and movement instructions.</p>
+        </div>
+        <div>
+          <div class="phone">
+            <div class="phone-placeholder">App Screenshot</div>
+            <img src="screenshots/drills.png" alt="Drills library" loading="lazy" onerror="this.style.display='none'">
+          </div>
+        </div>
+      </div>
+
+      <div class="feature">
+        <div>
+          <h3>Weekly Player Battles</h3>
+          <p>Players challenge teammates to weekly training battles. Most sessions logged wins +150 XP. Invite friends by text. Keeps the competition alive all summer.</p>
+        </div>
+        <div>
+          <div class="phone">
+            <div class="phone-placeholder">App Screenshot</div>
+            <img src="screenshots/battles.png" alt="Battles screen" loading="lazy" onerror="this.style.display='none'">
+          </div>
+        </div>
+      </div>
+
+      <div class="feature reverse">
+        <div>
+          <h3>Leaderboard &amp; Rankings</h3>
+          <p>Division standings, org rankings, and cross-program leaderboards. Players climb from Pylon → Grinder → Sniper → Elite → Legend over the summer.</p>
+        </div>
+        <div>
+          <div class="phone">
+            <div class="phone-placeholder">App Screenshot</div>
+            <img src="screenshots/leaderboard.png" alt="Leaderboard screen" loading="lazy" onerror="this.style.display='none'">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RANKS -->
+  <section class="ranks">
+    <div class="container">
+      <h2 class="section-title" style="color: var(--navy);">Earn Your Rank This Summer</h2>
+      <p class="section-kicker">Five tiers. Real perks unlock at the top.</p>
+      <div class="rank-row">
+        <div class="rank-card">
+          <span class="rank-emoji">🏒</span>
+          <div class="rank-name">Pylon</div>
+          <div class="rank-xp">0 XP</div>
+          <div class="rank-desc">You just laced up.</div>
+        </div>
+        <div class="rank-card">
+          <span class="rank-emoji">⚙️</span>
+          <div class="rank-name">Grinder</div>
+          <div class="rank-xp">400 XP</div>
+          <div class="rank-desc">The habit is forming.</div>
+        </div>
+        <div class="rank-card">
+          <span class="rank-emoji">🎯</span>
+          <div class="rank-name">Sniper</div>
+          <div class="rank-xp">1,200 XP</div>
+          <div class="rank-desc">Four weeks of consistent work.</div>
+        </div>
+        <div class="rank-card">
+          <span class="rank-emoji">⚡</span>
+          <div class="rank-name">Elite</div>
+          <div class="rank-xp">2,800 XP</div>
+          <div class="rank-desc">Halfway through summer, still grinding.</div>
+        </div>
+        <div class="rank-card">
+          <span class="rank-emoji">👑</span>
+          <div class="rank-name">Legend</div>
+          <div class="rank-xp">4,600 XP</div>
+          <div class="rank-desc">Near-perfect summer. You earned this.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="cta-banner">
+    <div class="container">
+      <h2>Ready to Build Your Offseason?</h2>
+      <p>Ask your coach for your team join code and get started today. It's free.</p>
+      <a class="btn btn-orange" href="https://app.drylandelite.com">Join Your Team →</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <span class="logo">DRYLAND<span>ELITE</span></span>
+        <span>Youth hockey dryland training app.</span>
+      </div>
+      <div>
+        Contact: <a href="mailto:info@drylandelite.com">info@drylandelite.com</a>
+      </div>
+      <div>
+        © 2026 Dryland Elite. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
