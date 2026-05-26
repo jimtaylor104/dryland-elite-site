@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#1B2A4A" />
+  <title>Dryland Elite</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;800&family=Barlow:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body { height: 100%; }
+
+    body {
+      min-height: 100vh;
+      min-height: 100dvh;
+      background: #1B2A4A;
+      color: #fff;
+      font-family: 'Barlow', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -webkit-tap-highlight-color: transparent;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: max(32px, env(safe-area-inset-top)) 24px max(32px, env(safe-area-inset-bottom));
+    }
+
+    .icon {
+      font-size: 64px;
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    .wordmark {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: clamp(40px, 11vw, 64px);
+      letter-spacing: 0.02em;
+      line-height: 1;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 14px;
+    }
+
+    .wordmark span { color: #00C4D4; }
+
+    .tagline {
+      font-size: clamp(14px, 4vw, 18px);
+      color: rgba(255, 255, 255, 0.7);
+      text-align: center;
+      max-width: 360px;
+      line-height: 1.45;
+      margin-bottom: 36px;
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 16px 36px;
+      background: #00C4D4;
+      color: #1B2A4A;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 196, 212, 0.25);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .cta:hover,
+    .cta:focus-visible {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 34px rgba(0, 196, 212, 0.32);
+    }
+
+    .cta:active { transform: translateY(0); }
+
+    .url-hint {
+      margin-top: 16px;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      color: rgba(255, 255, 255, 0.4);
+    }
+  </style>
+</head>
+<body>
+  <div class="icon" aria-hidden="true">🏒</div>
+
+  <h1 class="wordmark">DRYLAND<span>ELITE</span></h1>
+
+  <p class="tagline">The offseason is where champions are built.</p>
+
+  <a class="cta" href="https://app.drylandelite.com">
+    Open the App →
+  </a>
+
+  <div class="url-hint">app.drylandelite.com</div>
+</body>
+</html>
